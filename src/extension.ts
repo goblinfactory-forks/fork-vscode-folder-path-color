@@ -119,7 +119,9 @@ class ColorDecorationProvider implements vscode.FileDecorationProvider {
         });
       }
     });
-    this.constructFolders();
+    this.constructFolders().then(() => {
+      this._onDidChangeFileDecorations.fire(undefined);
+    });
   }
 
   provideFileDecoration(
