@@ -1,13 +1,13 @@
 {
   "name": "folder-path-color",
-  "displayName": "Folder Path Color",
-  "publisher": "VisbyDev",
-  "description": "All subfolders within a specified path will be assigned a color for easy differentiation.",
+  "displayName": "Folder Path Color (goblinfactory fork)",
+  "publisher": "goblinfactory-forks",
+  "description": "All subfolders within a specified path will be assigned a color for easy differentiation. Fork of jacob-j/vscode-folder-path-color with workspace-scoped settings support.",
   "version": "0.0.14",
   "icon": "/images/logo.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jacob-j/vscode-folder-path-color"
+    "url": "https://github.com/goblinfactory-forks/fork-vscode-folder-path-color"
   },
   "engines": {
     "vscode": "^1.78.0"
@@ -42,7 +42,8 @@
               }
             }
           },
-          "description": "Array of folder path and color pairs to be colored."
+          "description": "Array of folder path and color pairs to be colored.",
+          "scope": "resource"
         }
       }
     },
@@ -51,8 +52,8 @@
         "id": "folderPathColor.custom1",
         "description": "Assignable custom color 1 for the Folder Path Color extension",
         "defaults": {
-          "dark": "#ABCDEF",
-          "light": "#123456"
+          "dark": "#4CAF50",
+          "light": "#388E3C"
         }
       },
       {
@@ -102,6 +103,8 @@
     "compile": "webpack",
     "watch": "webpack --watch",
     "package": "webpack --mode production --devtool hidden-source-map",
+    "deploy:cursor": "vsce package && cursor --install-extension ./folder-path-color-$(node -p \"require('./package.json').version\").vsix",
+    "deploy:vscode": "vsce package && code --install-extension ./folder-path-color-$(node -p \"require('./package.json').version\").vsix",
     "compile-tests": "tsc -p . --outDir out",
     "watch-tests": "tsc -p . -w --outDir out",
     "pretest": "yarn run compile-tests && yarn run compile && yarn run lint",

@@ -78,4 +78,68 @@ Example configuration:
 
 This extension follows the [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines) provided by Visual Studio Code.
 
+# Build & Install locally from a Fork of the repo (from source / VSIX)
+
+These steps let you build a `.vsix` locally and install it manually without having to install the extension from the marketplace.
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (LTS recommended)
+- One package manager: `yarn` (recommended), `npm`, or `pnpm`
+
+### Install dependencies
+
+Using yarn:
+
+```bash
+yarn install
+```
+
+Using npm:
+
+```bash
+npm ci
+```
+
+Using pnpm:
+
+```bash
+pnpm install
+```
+
+### Build the extension bundle
+
+This produces `dist/extension.js` (the entrypoint referenced by `package.json`).
+
+```bash
+yarn package
+```
+
+### Create a VSIX package
+
+You can package using `vsce` without adding it to this repo:
+
+```bash
+npx --yes @vscode/vsce package
+```
+
+This will create a file like `folder-path-color-0.0.14.vsix` in the repo root.
+
+### Install the VSIX
+
+**Via the UI** (Cursor and VS Code):
+Extensions view → `...` menu → **Install from VSIX...** → pick the generated `.vsix`.
+
+**Via CLI**:
+
+```bash
+# Cursor
+cursor --install-extension ./folder-path-color-0.0.14.vsix
+
+# VS Code
+code --install-extension ./folder-path-color-0.0.14.vsix
+```
+
+If you rebuild and repackage, uninstall the previous version first (or restart the editor after installing the new VSIX).
+
 **Enjoy!**
